@@ -1,0 +1,15 @@
+## Interface: 120007, 120100, 120105, 16001
+## Title: EasyFishing
+## Notes: One-key fishing and a fishing log
+## Author: Silverkitty
+## Version: 1.0.0
+## Category: Miscellaneous
+## SavedVariables: EasyFishingDB
+## SavedVariablesPerCharacter: EasyFishingCharDB
+
+Core.lua
+LootLog.lua
+Fishing.lua
+FishingLog.lua
+Panel.lua
+Main.lua
