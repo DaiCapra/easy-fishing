@@ -82,8 +82,9 @@ def test_tag_is_colored_addon_name(ns):
 
 def test_db_helpers_return_the_saved_tables(addon):
     # ns.DB() and ns.CharDB() hand back the very tables the client saved as globals.
-    same = addon.lua.eval("function(n) return n.DB() == EasyFishingDB and n.CharDB() == EasyFishingCharDB end")
-    assert same(addon.ns) is True
+    g = addon.lua.globals()
+    assert g.rawequal(addon.ns["DB"](), g.EasyFishingDB)
+    assert g.rawequal(addon.ns["CharDB"](), g.EasyFishingCharDB)
 
 
 def test_unsecret_passes_normal_values(ns):

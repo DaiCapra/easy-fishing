@@ -227,9 +227,6 @@ function ns.SetFishingLog(on)
     end
 end
 
------------------------------
--- Settings (in the Fishing section, both menus)
------------------------------
 local LOG_LABEL = "Fishing Log"
 local LOG_DESC = "A window that opens when you fish: what you catch, catches per hour and your Fishing skill. Also /ef show and /ef hide."
 

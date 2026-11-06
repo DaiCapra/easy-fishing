@@ -3,9 +3,6 @@ local _, ns = ...
 -- Shared helpers for EasyFishing: client check, colours, backdrops, saved-table access, the toggle
 -- switch, button and slider widgets, the checkbox row factory and the saved-variable defaults.
 
------------------------------
--- Client
------------------------------
 do
     local _, _, _, tocVersion = GetBuildInfo()
     ns.IS_FOREVER = type(tocVersion) == "number" and tocVersion < 20000
@@ -436,9 +433,6 @@ function ns.CreateCyanAccentLine(parent)
     return line
 end
 
------------------------------
--- Checkbox factory (the Fishing Log row's switch)
------------------------------
 -- factory(content, anchor) -> AddCB, GetLast, SetLast. AddCB(name, key, label, desc, setter) puts
 -- a toggle under the last element, saves EasyFishingDB[key] and calls setter(checked).
 function ns.MakeCheckboxFactory(content, anchor)
@@ -472,9 +466,6 @@ function ns.MakeCheckboxFactory(content, anchor)
     return AddCB, GetLast, SetLast
 end
 
------------------------------
--- SavedVariables defaults
------------------------------
 local EASYFISHING_DEFAULTS = {
     fishing = true, fishingLoud = true, fishingLoudBoost = 3, fishingMute = false,
     fishingBackground = true, fishingIcon = true, fishingLog = true,

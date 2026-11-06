@@ -113,9 +113,6 @@ local ICON_CVARS = { SoftTargetIconGameObject = true, SoftTargetIconInteract = t
 -- The switches under Easy Fishing, and what each is before the player sets it.
 local SUB_DEFAULTS = { fishingLoud = true, fishingMute = false, fishingBackground = true, fishingIcon = true }
 
------------------------------
--- State
------------------------------
 local ev, owner, castBtn, lootBtn
 local enabled = false
 local channeling = false          -- a Fishing channel runs
@@ -200,7 +197,6 @@ local function CueDelay()
     end
     return math.max(CUE_MIN, math.min(CUE_MAX, longest + CUE_MARGIN))
 end
-
 
 local function PoleOnly() return ns.IS_FOREVER == true end
 
@@ -305,9 +301,6 @@ local function KeyText(key)
     return ok and type(text) == "string" and text ~= "" and text or key
 end
 
------------------------------
--- Frames (made on first use, never at load)
------------------------------
 local OnEvent
 local function EnsureFrames()
     if ev then return end
@@ -466,9 +459,6 @@ local function EndSessionLater()
     endTimer = C_Timer.NewTimer(CAST_WAIT, RunSessionEnd)
 end
 
------------------------------
--- The key
------------------------------
 local function Wanted()
     local key = DB().fishingKey
     if not enabled or type(key) ~= "string" or key == "" then return nil end
@@ -555,9 +545,6 @@ function WatchRegen()
     ev:RegisterEvent("PLAYER_REGEN_ENABLED")
 end
 
------------------------------
--- Events
------------------------------
 local function SetReach(guid)
     local was = inReach
     inReach = IsBobber(guid)
@@ -682,9 +669,6 @@ function OnEvent(event, ...)
     end
 end
 
------------------------------
--- Public
------------------------------
 local uiRefreshers = {}
 local function RefreshUI()
     for _, fn in ipairs(uiRefreshers) do pcall(fn) end
@@ -760,9 +744,6 @@ end
 function ns.SetFishingBackground(on) SetSub("fishingBackground", on, SOUND_ALL) end
 function ns.SetFishingIcon(on) SetSub("fishingIcon", on, ICON_CVARS) end
 
------------------------------
--- Settings
------------------------------
 local MODIFIERS = { LSHIFT = true, RSHIFT = true, LCTRL = true, RCTRL = true, LALT = true, RALT = true,
     LMETA = true, RMETA = true, UNKNOWN = true }
 -- Mouse buttons that can be a fishing key. Left and right stay the mouse's: they cancel.

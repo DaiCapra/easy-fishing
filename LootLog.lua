@@ -36,9 +36,6 @@ local HIST_H = 300      -- the History panel
 local HIST_ROW = 66     -- one past session
 local HIST_ICONS = 8    -- the items a History entry keeps (S.Archive)
 
------------------------------
--- Sessions (pure: the tests run them)
------------------------------
 local S = {}
 ns.LootSession = S
 
@@ -107,9 +104,6 @@ function S.Archive(s, now, idle, extra)
     return entry
 end
 
------------------------------
--- Quality
------------------------------
 local QUALITY = { [0] = { 0.62, 0.62, 0.62 }, [1] = { 1, 1, 1 }, [2] = { 0.12, 1, 0 }, [3] = { 0, 0.44, 0.87 },
     [4] = { 0.64, 0.21, 0.93 }, [5] = { 1, 0.5, 0 }, [6] = { 0.9, 0.8, 0.5 }, [7] = { 0, 0.8, 1 } }
 local function QualityColor(q)
@@ -127,9 +121,6 @@ local function QualityWord(q)
     return type(w) == "string" and w ~= "" and w or QUALITY_WORDS[tonumber(q)] or "Rare"
 end
 
------------------------------
--- The loot window, and the cast it follows
------------------------------
 local LOOT_ITEM = (Enum and Enum.LootSlotType and Enum.LootSlotType.Item) or 1
 
 -- The items in the open loot window ({ item = { id, link, name, icon, quality }, count }) and the
@@ -216,9 +207,6 @@ function ns.LootLogClosed(s, title, kind, command)
     ns.Print((ns.TAG .. " %s closed until your next %s session. Type %s to open it."):format(title, kind, command))
 end
 
------------------------------
--- Words and numbers
------------------------------
 local function Commas(n)
     if BreakUpLargeNumbers then return BreakUpLargeNumbers(n) end
     return tostring(n)
@@ -297,9 +285,6 @@ local function Duration(secs)
     return ("%d h %d min"):format(math.floor(m / 60), m % 60)
 end
 
------------------------------
--- The window
------------------------------
 local function Fill(tex, r, g, b, a) tex:SetColorTexture(r, g, b, a or 1) end
 
 local function Text(parent, font, r, g, b)
