@@ -69,7 +69,7 @@ local function Model()
     local s = Session(false) or S.New(Now())
     local now = Now()
     local elapsed = S.Elapsed(s, now, IDLE)
-    local rows = S.Rows(s, "count")
+    local rows = S.Shares(S.Rows(s, "count"))   -- each catch's share of everything caught
     local perHour = ns.LootLogPerHour(s.catches, elapsed)
     local latest = ns.LootLatestCard(s, "catch")
     local footer
