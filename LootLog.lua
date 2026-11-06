@@ -94,6 +94,25 @@ function S.Rows(s)
     return rows
 end
 
+-- Each row's share of everything in the rows, as a whole percent (`pct`); under 1% but more than
+-- none reads as "<1%" in the window, so `pct` is 0 only for an empty row.
+function S.Shares(rows)
+    local total = 0
+    for _, r in ipairs(rows) do total = total + (tonumber(r.count) or 0) end
+    for _, r in ipairs(rows) do
+        r.pct = total > 0 and math.floor((tonumber(r.count) or 0) / total * 100 + 0.5) or 0
+    end
+    return rows
+end
+
+-- "x12 · 40%", or "x12" for a row without a share.
+function S.CountText(row)
+    local text = "x" .. tostring(row.count or 0)
+    if row.pct == nil then return text end
+    local pct = (row.pct < 1 and (row.count or 0) > 0) and "<1%" or (row.pct .. "%")
+    return text .. " · " .. pct
+end
+
 -- A finished session as a History entry (the top items only).
 function S.Archive(s, now, idle, extra)
     local rows = S.Rows(s)
@@ -763,7 +782,7 @@ function ns.CreateLootLog(opts)
                 row.icon:Set(it.icon, it.quality)
                 row.name:SetText(it.name or "?")
                 row.name:SetTextColor(QualityColor(it.quality))
-                row.count:SetText("x" .. it.count)
+                row.count:SetText(S.CountText(it))
                 row:Show()
                 y = y - ROW_H
             else
